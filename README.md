@@ -2,6 +2,7 @@ Emergency Badges
 ===============
 
 A basic framework to help people give recognition via [Open Badges](http://openbadges.org/ "OpenBadges") during times of emergency. 
+This project was born out of a hack jam at the Mozilla Festival in the "Emergency Hack Lab" workshop.
 
 ===============
 ##Workflow:<br>
