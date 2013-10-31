@@ -25,4 +25,6 @@ Check out an interactive workflow here: <em>http://proto.ballard.is/moz/ehl/</em
 <li><strong>Volunteer at Large:</strong>I came into the affected neighborhood because I have significant previous experience in response (check out all my badges!). I want to be sure I'm helping where it's needed, and so I ask people I interact with to ping the system. From that feedback, I can see that I did an awful lot of work around Organization X's objectives, and will reach out to them about working more closely in the future. Knowing that I did good work makes me want to go back and help more, too. </li>
 </ul>
 
+##Badge Descriptions: <br>
+Check out the badge descriptions etherpad here <em>https://etherpad.mozilla.org/emergency-badges</em>
 
