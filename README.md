@@ -1,7 +1,7 @@
 Emergency Badges
 ===============
 
-A basic framework to help people give recognition via OpenBadges during times of emergency. 
+A basic framework to help people give recognition via [Open Badges](http://openbadges.org/ "OpenBadges") during times of emergency. 
 
 ===============
 Workflow:<br>
