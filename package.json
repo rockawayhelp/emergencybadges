@@ -1,6 +1,6 @@
 {
   "name": "emergencybadges",
-  "version": "0.0.0",
+  "version": "0.0.0-1",
   "description": "A basic framework to help people give recognition via OpenBadges during times of emergency.",
   "main": "index.js",
   "scripts": {
@@ -28,5 +28,9 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-exec": "~0.4.3"
+  },
+  "subdomain": "emergencybadges",
+  "engines": {
+    "node": "0.10.25"
   }
 }
