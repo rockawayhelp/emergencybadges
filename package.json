@@ -1,0 +1,32 @@
+{
+  "name": "emergencybadges",
+  "version": "0.0.0",
+  "description": "A basic framework to help people give recognition via OpenBadges during times of emergency.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rockawayhelp/emergencybadges.git"
+  },
+  "keywords": [
+    "sms",
+    "civic-hacking",
+    "emergency-response"
+  ],
+  "author": "Rockaway Help",
+  "license": "MPLv2",
+  "bugs": {
+    "url": "https://github.com/rockawayhelp/emergencybadges/issues"
+  },
+  "dependencies": {
+    "request": "~2.33.0",
+    "restify": "~2.6.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-exec": "~0.4.3"
+  }
+}
