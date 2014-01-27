@@ -11,6 +11,8 @@ module.exports = function (server) {
       session.flushall(function () {
         messenger.send(phoneNumber, 'The database has been flushed.');
       });
+      res.send(200);
+      return;
     }
   
     session.get(phoneNumber, function(err, user) {
