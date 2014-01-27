@@ -25,8 +25,8 @@ server.post('/messages', function (req, res, next) {
   
   session.get(phoneNumber, function(err, user) {
     if (err) {
-      messenger.send(phoneNumber, 'There was some kind of error.');
-      res.send(500, {error: 'Something went wrong.'});
+      messenger.fail(phoneNumber);
+      res.send(500)
     }
     if (user) {
       messenger.send(phoneNumber, 'Hello, old friend. (' + user + ')' );
