@@ -1,9 +1,9 @@
 var restify = require('restify');
+
 var messenger = require('./lib/messenger');
+var session = require('./lib/session');
 
 var server = restify.createServer();
-
-var users = {};
 
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
@@ -16,12 +16,16 @@ server.get('/', function (req, res, next) {
 server.post('/messages', function (req, res, next) {
   var phoneNumber = req.params.From;
   
-  if (users[phoneNumber]) {
-    messenger.send(phoneNumber, 'Hello, old friend.');
-  } else {
-    messenger.send(phoneNumber, 'Nice to meet you.');
-    users[phoneNumber] = req.params;
-  }
+  session.get(phoneNumber, function(err, user) {
+    if (err) messenger.send(phoneNumber, 'There was some kind of error.')
+    if (user) {
+      messenger.send(phoneNumber, 'Hello, old friend.');
+    } else {
+      session.set(phoneNumber, 'initial', function () {
+        res.send(phoneNumber, 'Nice to meet you.')
+      })
+    }
+  });
   
   res.send(200, {status: 'ok'});
 });

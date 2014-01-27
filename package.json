@@ -24,7 +24,9 @@
   "dependencies": {
     "request": "~2.33.0",
     "restify": "~2.6.1",
-    "twilio": "~1.5.0"
+    "twilio": "~1.5.0",
+    "redis": "~0.10.0",
+    "hiredis": "~0.1.16"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
