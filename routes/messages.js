@@ -1,5 +1,5 @@
-var messenger = require('./lib/messenger');
-var session = require('./lib/session');
+var messenger = require('../lib/messenger');
+var session = require('../lib/session');
 
 module.exports = function (server) {
   
