@@ -2,27 +2,27 @@
   "name": "emergencybadges",
   "version": "0.0.0-1",
   "description": "A basic framework to help people give recognition via OpenBadges during times of emergency.",
+  "author": "Rockaway Help",
+  "license": "MPLv2",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "jshint app/*"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/rockawayhelp/emergencybadges.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rockawayhelp/emergencybadges/issues"
   },
   "keywords": [
     "sms",
     "civic-hacking",
     "emergency-response"
   ],
-  "author": "Rockaway Help",
-  "license": "MPLv2",
-  "bugs": {
-    "url": "https://github.com/rockawayhelp/emergencybadges/issues"
-  },
   "dependencies": {
-    "request": "~2.33.0",
     "restify": "~2.6.1",
     "twilio": "~1.5.0",
     "redis": "~0.10.0",
@@ -30,10 +30,11 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-exec": "~0.4.3"
+    "grunt-exec": "~0.4.3",
+    "jshint": "~2.4.3"
   },
-  "subdomain": "emergencybadges",
   "engines": {
     "node": "0.10.25"
-  }
+  },
+  "subdomain": "emergencybadges"
 }

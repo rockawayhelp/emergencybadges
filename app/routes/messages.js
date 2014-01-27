@@ -5,9 +5,9 @@ module.exports = function (server) {
   
   server.post('/messages', function (req, res, next) {
     var phoneNumber = req.params.From;
-    var message = req.params.Body.toLowerCase();
+    var message = req.params.Body;
   
-    if (message === 'flush') {
+    if (message.toLowerCase() === 'flush') {
       session.flushall(function () {
         messenger.send(phoneNumber, 'The database has been flushed.');
       });
@@ -32,4 +32,4 @@ module.exports = function (server) {
     res.send(200, {status: 'ok'});
   });
   
-}
+};
