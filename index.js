@@ -1,4 +1,6 @@
 var restify = require('restify');
+var messenger = require('./lib/messenger');
+
 var server = restify.createServer();
 
 server.use(restify.queryParser());
@@ -10,6 +12,7 @@ server.get('/', function (req, res, next) {
 });
 
 server.post('/messages', function (req, res, next) {
+  console.log(req.params);
   res.send(200, {status: 'ok'});
 });
 
