@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./app/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run lint && tap ./test",
     "lint": "jshint app/*"
   },
   "repository": {
@@ -31,7 +31,8 @@
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-exec": "~0.4.3",
-    "jshint": "~2.4.3"
+    "jshint": "~2.4.3",
+    "tap": "~0.4.8"
   },
   "engines": {
     "node": "0.10.25"
