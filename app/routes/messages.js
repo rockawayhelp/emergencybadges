@@ -1,5 +1,5 @@
 var messenger = require('../lib/messenger');
-var session = require('../lib/session');
+var database = require('../lib/database');
 
 module.exports = function (server) {
   
@@ -8,14 +8,14 @@ module.exports = function (server) {
     var message = req.params.Body;
   
     if (message.toLowerCase() === 'flush') {
-      session.flushall(function () {
+      database.flushall(function () {
         messenger.send(phoneNumber, 'The database has been flushed.');
       });
       res.send(200);
       return;
     }
   
-    session.get(phoneNumber, function(err, user) {
+    database.get(phoneNumber, function(err, user) {
       if (err) {
         messenger.fail(phoneNumber);
         res.send(500);
@@ -23,7 +23,7 @@ module.exports = function (server) {
       if (user) {
         messenger.send(phoneNumber, 'Hello, old friend. (' + user + ')' );
       } else {
-        session.set(phoneNumber, 'initial', function () {
+        database.set(phoneNumber, 'initial', function () {
           messenger.send(phoneNumber, 'Nice to meet you.');
         });
       }
