@@ -16,7 +16,7 @@ server.get('/', function (req, res, next) {
 server.post('/messages', function (req, res, next) {
   var phoneNumber = req.params.From;
   
-  if users[phoneNumber] {
+  if (users[phoneNumber]) {
     messenger.send(phoneNumber, 'Hello, old friend.');
   } else {
     messenger.send(phoneNumber, 'Nice to meet you.');
