@@ -17,13 +17,18 @@ server.post('/messages', function (req, res, next) {
   var phoneNumber = req.params.From;
   
   session.get(phoneNumber, function(err, user) {
-    if (err) messenger.send(phoneNumber, 'There was some kind of error.')
+    if (err) {
+      messenger.send(phoneNumber, 'There was some kind of error.');
+      res.send(500, {error: 'Something went wrong.'});
+    }
     if (user) {
       messenger.send(phoneNumber, 'Hello, old friend.');
+      res.send(200);
     } else {
       session.set(phoneNumber, 'initial', function () {
-        res.send(phoneNumber, 'Nice to meet you.')
-      })
+        messenger.send(phoneNumber, 'Nice to meet you.');
+        res.send(200);
+      });
     }
   });
   
