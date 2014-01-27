@@ -12,7 +12,8 @@ server.get('/', function (req, res, next) {
 });
 
 server.post('/messages', function (req, res, next) {
-  console.log(req.params);
+  var phoneNumber = req.params.From;
+  messenger.send(phoneNumber, 'Got it.');
   res.send(200, {status: 'ok'});
 });
 
