@@ -14,6 +14,7 @@ server.get('/', function (req, res, next) {
 });
 
 server.post('/messages', function (req, res, next) {
+  console.log(req);
   var phoneNumber = req.params.From;
   
   session.get(phoneNumber, function(err, user) {
@@ -23,11 +24,9 @@ server.post('/messages', function (req, res, next) {
     }
     if (user) {
       messenger.send(phoneNumber, 'Hello, old friend.');
-      res.send(200);
     } else {
       session.set(phoneNumber, 'initial', function () {
         messenger.send(phoneNumber, 'Nice to meet you.');
-        res.send(200);
       });
     }
   });
