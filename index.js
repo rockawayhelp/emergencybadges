@@ -14,8 +14,14 @@ server.get('/', function (req, res, next) {
 });
 
 server.post('/messages', function (req, res, next) {
-  console.log(req);
   var phoneNumber = req.params.From;
+  var message = req.params.Body.toLowerCase();
+  
+  if (message === 'flush') {
+    session.flushall(function () {
+      messenger('The database has been flushed.');
+    });
+  }
   
   session.get(phoneNumber, function(err, user) {
     if (err) {
