@@ -19,7 +19,7 @@ server.post('/messages', function (req, res, next) {
   
   if (message === 'flush') {
     session.flushall(function () {
-      messenger('The database has been flushed.');
+      messenger.send('The database has been flushed.');
     });
   }
   
