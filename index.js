@@ -29,7 +29,7 @@ server.post('/messages', function (req, res, next) {
       res.send(500, {error: 'Something went wrong.'});
     }
     if (user) {
-      messenger.send(phoneNumber, 'Hello, old friend.');
+      messenger.send(phoneNumber, 'Hello, old friend. (' + user + ')' );
     } else {
       session.set(phoneNumber, 'initial', function () {
         messenger.send(phoneNumber, 'Nice to meet you.');
