@@ -7,7 +7,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./app/index.js",
-    "test": "npm run lint && tap ./test",
+    "test": "npm run lint && tap ./test/*.js",
     "lint": "jshint app/*"
   },
   "repository": {
@@ -26,7 +26,9 @@
     "restify": "~2.6.1",
     "twilio": "~1.5.0",
     "redis": "~0.10.0",
-    "hiredis": "~0.1.16"
+    "hiredis": "~0.1.16",
+    "request": "~2.33.0",
+    "cradle": "~0.6.6"
   },
   "devDependencies": {
     "jshint": "~2.4.3",

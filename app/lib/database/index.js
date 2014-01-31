@@ -1,12 +1,23 @@
-var url = require('url');
-var redis = require('redis');
+var cradle = require('cradle');
 
-if (process.env.REDISTOGO_URL) {
-  var rtg   = url.parse(process.env.REDISTOGO_URL);
-  var client = redis.createClient(rtg.port, rtg.hostname);
-  client.auth(rtg.auth.split(':')[1]);
-} else {
-  var client = redis.createClient();
-}
+var couchLocation = process.env.EMERGENCY_BADGES_COUCHDB_URL;
+var couch = new(cradle.Connection)(couch, 5984, {
+  cache: true,
+  raw: false
+});
 
-module.exports = client;
+var db = couch.database('emergencybadges');
+
+db.exists(function (err, exists) {
+  if (err) {
+    console.log('error', err);
+  } else if (exists) {
+    console.log('Database exists.');
+  } else {
+    console.log('Database does not exist. Creating.');
+    db.create();
+    /* populate design documents */
+  }
+});
+
+module.exports = db;
