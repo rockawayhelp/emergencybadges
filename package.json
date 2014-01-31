@@ -29,8 +29,6 @@
     "hiredis": "~0.1.16"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-exec": "~0.4.3",
     "jshint": "~2.4.3",
     "tap": "~0.4.8"
   },
