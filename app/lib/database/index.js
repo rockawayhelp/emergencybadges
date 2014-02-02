@@ -1,7 +1,8 @@
 var cradle = require('cradle');
+var applyDesignDocuments = require('./design-documents');
 
-var couchLocation = process.env.EMERGENCY_BADGES_COUCHDB_URL;
-var couch = new(cradle.Connection)(couch, 5984, {
+var couchLocation = process.env.COUCHDB || process.env.CLOUDANT_URL;
+var couch = new(cradle.Connection)(couchLocation, 5984, {
   cache: true,
   raw: false
 });
@@ -16,7 +17,7 @@ db.exists(function (err, exists) {
   } else {
     console.log('Database does not exist. Creating.');
     db.create();
-    /* populate design documents */
+    applyDesignDocuments(db);
   }
 });
 

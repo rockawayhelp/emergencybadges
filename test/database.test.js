@@ -6,4 +6,3 @@ test('Environment variables should be defined', function (t) {
   t.ok(process.env.EMERGENCY_BADGES_COUCHDB_PASSWORD, 'process.env.EMERGENCY_BADGES_COUCHDB_PASSWORD should be defined.');
   t.end();
 });
-
