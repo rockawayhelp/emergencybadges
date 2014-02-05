@@ -10,6 +10,7 @@ To get up and running, you're going to need to do a little bit of configuration.
 
 * Clone the repository and run `heroku create`.
 * Add free `redistogo` add-on to your Heroku app: `heroku addons:add redistogo`.
+* Add free `cloudant` add-on to your Heroku app: `heroku addons:add cloudant`.
 * Run `npm install` like a civilized person.
 * Set some environment variables: `heroku config:set TWILIO_ACCOUNT_ID=… TWILIO_AUTH_TOKEN=… TWILIO_PHONE_NUMBER=…`. Replace the ellipses with the pertinent information.
 * Deploy your little heart out.
