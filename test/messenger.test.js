@@ -1,4 +1,4 @@
-var test = require("tap").test;
+var test = require('./').test;
 var messenger = require('../app/lib/messenger');
 
 test('Messenger should have the methods called in the app', function (t) {
