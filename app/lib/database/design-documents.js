@@ -9,9 +9,10 @@ module.exports = function (db) {
       },
       byZipCode: {
         map: 'function (doc) { if (doc.type === "task") { emit(doc.zip, doc); } }'
+      },
+      byZipAndResource: {
+        map: 'function (doc) { if (doc.type === "task") { doc.resources.forEach(function (resource) { emit([doc.zip, resource], doc) }); } }'
       }
     }
   });
-  
-  return db;
 };
