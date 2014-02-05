@@ -1,22 +1,11 @@
-var db = require('../lib/database');
+var tasks = require('../lib/tasks');
 
 module.exports = function (server) {
   
   server.get('/tasks', function (req, res, next) {
-    db.view('tasks/all', function (err, rows) {
-      var tasks = [];
-      
-      if (err) {
-        res.send(500, err);
-        return;
-      }
-      
-      rows.forEach(function (task) {
-        tasks.push(task);
-      });
-      
+    tasks.getAll(function (err, tasks) {
+      if (err) res.send(500, err);
       res.send(200, tasks);
-      
     });
   });
   

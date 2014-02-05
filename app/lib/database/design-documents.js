@@ -1,5 +1,5 @@
 module.exports = function (db) {
-  db.save('_design/task', {
+  db.save('_design/tasks', {
     views: {
       all: {
         map: 'function (doc) { if (doc.type === "task") { emit(doc._id, doc); } }'
