@@ -1,3 +1,5 @@
+if (process.env.NODE_ENV === 'development') require('../test');
+
 var restify = require('restify');
 var applyRoutes = require('./routes');
 

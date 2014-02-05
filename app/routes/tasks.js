@@ -1,9 +1,9 @@
-var db = require('../database');
+var db = require('../lib/database');
 
 module.exports = function (server) {
   
   server.get('/tasks', function (req, res, next) {
-    db.view('tasks/all', function (err, res) {
+    db.view('tasks/all', function (err, rows) {
       var tasks = [];
       
       if (err) {
@@ -11,7 +11,7 @@ module.exports = function (server) {
         return;
       }
       
-      res.forEach(function (task) {
+      rows.forEach(function (task) {
         tasks.push(task);
       });
       
@@ -20,4 +20,4 @@ module.exports = function (server) {
     });
   });
   
-}
+};

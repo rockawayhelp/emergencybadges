@@ -22,15 +22,15 @@ db.setup = function (callback) {
         if (!err) {
           applyDesignDocuments(db);
           if (typeof callback === 'function') callback();
-        };
+        }
       });
     }
   });
-}
+};
 
 db.updateDesignDocuments = function (callback) {
   applyDesignDocuments(db);
   if (typeof callback === 'function') callback();
-}
+};
 
 module.exports = db;
