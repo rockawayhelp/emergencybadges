@@ -9,7 +9,7 @@
     "start": "node ./app/index.js",
     "lint": "jshint app/*",
     "seed": "node ./seed",
-    "test": "npm run lint && tap ./test/*.test.js",
+    "test": "npm run lint && tap ./test/*.test.js"
   },
   "repository": {
     "type": "git",
