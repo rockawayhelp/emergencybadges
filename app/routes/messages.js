@@ -13,7 +13,7 @@ module.exports = function (server) {
       
       if (err) { res.send(500, err), process.stdout.write(err) };
 
-      responseMessage = user.status === 'Hello, new friend.' : 'Welcome back, old friend.';
+      responseMessage = user.status ? 'Hello, new friend.' : 'Welcome back, old friend.';
 
       user.message(responseMessage, function () {
         console.log('Message (theoretically) sent.');
