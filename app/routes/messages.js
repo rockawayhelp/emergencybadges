@@ -21,6 +21,7 @@ module.exports = function (server) {
       if (message.toUpperCase() === "RESTART") {
         user.set('status', null, function (err) {
           user.message('Resetting...');
+          user.destroy();
         });
         return;
       }
@@ -36,20 +37,20 @@ module.exports = function (server) {
       }
       
       if (user.status === 'waitingOnZipCode') {
-        console.log('I am inside the waitingOnZipCode conditional');
-        var zip = message.match(/\d{5}/);
-        
-        console.log(zip);
+        var zip = message.match(/\d{5}/) && message.match(/\d{5}/)[0];
         
         if (zip) {
           tasks.getResourcesByZip(zip, function (err, resources) {
             if (err) console.log(err);
             user.set({ zip: zip, resourcesRequested: resources, status: 'waitingOnResources' }, function (err) {
               if (err) console.log(err);
-              user.message('Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', '));
+              user.message('Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', ') + '.');
             });
           });
+        } else {
+          user.message('That doesn\'t seem to be a valid zip code. Please try again.')
         }
+        
         res.send(200, { from: phoneNumber, user: user }); 
         return;
       }
