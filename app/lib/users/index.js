@@ -18,7 +18,6 @@ function User(doc) {
   
   // Override the document type with 'user' no matter what.
   this.type = 'user';
-  this.status = this.status || 'initial';
   
 }
 
@@ -63,6 +62,11 @@ User.prototype.message = function (message, callback) {
   console.log('Sending:', message);
   messenger.send(this._id, message);
   if (typeof callback === 'function') callback();
+};
+
+User.prototype.setStatus = function (status, callback) {
+  this.status = status;
+  this.save(callback);
 };
 
 module.exports = User;
