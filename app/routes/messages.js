@@ -55,20 +55,20 @@ module.exports = function (server) {
         return;
       }
       
-      if (user.status === 'waitingOnResources') {
+      if (user.status === 'waitingOnResources' || user.status === 'taskSelection') {
         var resource = message.toUpperCase().trim();
         
         if (user.resourcesRequested.indexOf(resource) !== 1) {
           user.set({ resource: resource, status: 'taskSelection' }, function (err) {
-            console.log(err);
-            tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
-              console.log(err, tasks);
-              var taskTemplate = _.template('<%= id %>: <%= description %> (@ <%= address %>)');
-              tasks = tasks
-                .map(function (task) { return task.value; })
-                .forEach(function (task) { user.message(taskTemplate(task)); } );
-              console.log(tasks);
-            });
+            if (err) console.log(err);
+            if (!err) console.log('User updated.');
+          });
+          tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
+            console.log(err, tasks);
+            var taskTemplate = _.template('<%= id %>: <%= description %> (@ <%= address %>)');
+            tasks = tasks
+              .map(function (task) { return task.value; })
+              .forEach(function (task) { user.message(taskTemplate(task)); } );
           });
         } else {
           user.message('That doesn\'t seem to be a valid choice. Please select one of the following: ' + resources.join(', ') + '.');
