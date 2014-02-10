@@ -56,7 +56,18 @@ module.exports = function (server) {
       }
       
       if (user.status === 'waitingOnResources') {
-        user.message('Not implemented.');
+        var resource = message.toUpperCase().trim();
+        
+        if (user.resourcesRequested.indexOf(resource) !== 1) {
+          user.set({ resource: resource, status: 'taskSelection' }, function (err) {
+            tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
+              console.log(tasks);
+            });
+          });
+        } else {
+          user.message('That doesn\'t seem to be a valid choice. Please select one of the following: ' + resources.join(', ') + '.');
+        }
+        
         res.send(200, { from: phoneNumber, user: user }); 
         return;
       }
