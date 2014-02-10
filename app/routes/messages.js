@@ -30,10 +30,14 @@ module.exports = function (server) {
       
       if (user.status === 'waitingOnZipCode') {
         var zip = user.message.match(/\d{5}/) && user.message.match(/\d{5}/)[0];
+        
+        console.log(zip);
+        
         if (zip) {
           tasks.getResourcesByZip(zip, function (err, resources) {
             if (err) console.log(err);
-            user.set({ zip: zip, resourcesRequested: resources, status: 'waitingOnResources' }, function () {
+            user.set({ zip: zip, resourcesRequested: resources, status: 'waitingOnResources' }, function (err) {
+              if (err) console.log(err);
               user.message('Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', '));
             });
           });
