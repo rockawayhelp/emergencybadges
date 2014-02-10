@@ -8,8 +8,8 @@ module.exports = {
       to: number,
       from: phoneNumber
     }, function(err, message) {
-      if (err) process.stdout.write(err);
-      process.stdout.write(message.sid);
+      if (err) console.log(err);
+      console.log(message.sid);
     });
   },
   fail: function (number) {
@@ -18,7 +18,7 @@ module.exports = {
       to: number,
       from: phoneNumber
     }, function(err, message) {
-      process.stdout.write(message.sid);
+      console.log(message.sid);
     });
   }
 };
