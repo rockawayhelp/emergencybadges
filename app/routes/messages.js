@@ -14,7 +14,7 @@ module.exports = function (server) {
     
     User.findOrCreate(phoneNumber, function (err, user) {
       
-      if (err) { res.send(500, err), process.stdout.write(err) };
+      if (err) { res.send(500, err); console.log(err); return; };
       
       console.log(user);
       
