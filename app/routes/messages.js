@@ -18,7 +18,8 @@ module.exports = function (server) {
       
       // TODO: This is a just a WIP while we get the general flow down.
       if (!user.status) {
-        user.setStatus('waitingOnZipCode', function () {
+        user.setStatus('waitingOnZipCode', function (err, doc) {
+          if (err) console.log(err);
           user.message('Welcome. What zip code are you in?');
         });
       }
