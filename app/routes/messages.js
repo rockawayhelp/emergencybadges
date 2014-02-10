@@ -17,6 +17,7 @@ module.exports = function (server) {
         responseMessage = 'Welcome back, old friend.';
       }
 
+      user.message(responseMessage);
       res.send(200, { from: phoneNumber, user: user, response: responseMessage });
 
     });
