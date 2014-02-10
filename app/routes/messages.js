@@ -8,7 +8,7 @@ module.exports = function (server) {
     var message = req.params.Body;
     
     // TODO: Implement
-    messenger.send(phoneNumber + ': ' + message);
+    messenger.send(phoneNumber, message);
   });
   
 };
