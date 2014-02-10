@@ -37,7 +37,7 @@ module.exports = function (server) {
       
       if (user.status === 'waitingOnZipCode') {
         console.log('I am inside the waitingOnZipCode conditional');
-        var zip = user.message.match(/\d{5}/);
+        var zip = message.match(/\d{5}/);
         
         console.log(zip);
         
