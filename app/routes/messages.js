@@ -60,11 +60,14 @@ module.exports = function (server) {
         
         if (user.resourcesRequested.indexOf(resource) !== 1) {
           user.set({ resource: resource, status: 'taskSelection' }, function (err) {
+            console.log(err);
             tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
+              console.log(err, tasks);
               var taskTemplate = _.template('<%= id %>: <%= description %> (@ <%= address %>)');
-              tasks
+              tasks = tasks
                 .map(function (task) { return task.value; })
                 .forEach(function (task) { user.message(taskTemplate(task)); } );
+              console.log(tasks);
             });
           });
         } else {
