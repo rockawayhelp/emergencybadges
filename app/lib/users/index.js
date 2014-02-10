@@ -42,9 +42,9 @@ User.find = function (phoneNumber, callback) {
 User.findOrCreate = function (phoneNumber, callback) {
   User.find(phoneNumber, function (err, doc) {
     if (!err && doc) { callback(null, doc); return; }
-    if (err.error === 'not_found') {
+    if (err.error === 'not_found' && err.reason === 'missing') {
       var user = User.create(phoneNumber);
-      user.save(callback);
+      user.save(function () { callback(null, user); });
     } else {
       callback(err);
     }

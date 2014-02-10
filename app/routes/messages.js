@@ -11,17 +11,12 @@ module.exports = function (server) {
     
     User.findOrCreate(phoneNumber, function (err, user) {
       
-      console.log('User.findOrCreate', err, user);
+      if (err) { res.send(500, err), process.stdout.write(err) };
 
-      if (err) res.send(500, err);
-
-      if (user.status === 'initial') {
-        responseMessage = 'Hello, new friend.';
-      } else {
-        responseMessage = 'Welcome back, old friend.';
-      }
+      responseMessage = user.status === 'Hello, new friend.' : 'Welcome back, old friend.';
 
       user.message(responseMessage, function () {
+        console.log('Message (theoretically) sent.');
         res.send(200, { from: phoneNumber, user: user, response: responseMessage });
       });
 
