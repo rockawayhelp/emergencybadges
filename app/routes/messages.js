@@ -16,6 +16,8 @@ module.exports = function (server) {
       
       if (err) { res.send(500, err), process.stdout.write(err) };
       
+      console.log(user);
+      
       // TODO: This is a just a WIP while we get the general flow down.
       if (!user.status) {
         user.setStatus('waitingOnZipCode', function (err, doc) {
