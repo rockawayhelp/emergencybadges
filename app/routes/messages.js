@@ -1,5 +1,4 @@
-var messenger = require('../lib/messenger');
-var database = require('../lib/database');
+var User = require('../lib/users');
 
 module.exports = function (server) {
   
@@ -7,8 +6,20 @@ module.exports = function (server) {
     var phoneNumber = req.params.From;
     var message = req.params.Body;
     
-    // TODO: Implement
-    messenger.send(phoneNumber, message);
+    var responseMessage;
+    User.findOrCreate(phoneNumber, function (err, user) {
+
+      if (err) res.send(500, err);
+
+      if (user.status === 'initial') {
+        responseMessage = 'Hello, new friend.';
+      } else {
+        responseMessage = 'Welcome back, old friend.';
+      }
+
+      res.send(200, { from: phoneNumber, user: user, response: responseMessage });
+
+    });
   });
   
 };

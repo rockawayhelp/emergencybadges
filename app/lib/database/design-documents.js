@@ -1,4 +1,5 @@
 module.exports = function (db) {
+  
   db.save('_design/tasks', {
     views: {
       all: {
@@ -15,4 +16,13 @@ module.exports = function (db) {
       }
     }
   });
+  
+  db.save('_design/users', {
+    views: {
+      all: {
+        map: 'function (doc) { if (doc.type === "user") { emit(doc._id, doc); } }'
+      }
+    }
+  });
+  
 };
