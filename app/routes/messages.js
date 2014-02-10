@@ -61,7 +61,10 @@ module.exports = function (server) {
         if (user.resourcesRequested.indexOf(resource) !== 1) {
           user.set({ resource: resource, status: 'taskSelection' }, function (err) {
             tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
-              console.log(tasks);
+              var taskTemplate = _.template('<%= id %>: <%= description %> (@ <%= address %>)');
+              tasks
+                .map(function (task) { return task.value; })
+                .forEach(function (task) { user.message(taskTemplate(task)); } );
             });
           });
         } else {
