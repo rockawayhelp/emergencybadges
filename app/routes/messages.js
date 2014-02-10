@@ -28,6 +28,8 @@ module.exports = function (server) {
         return;
       }
       
+      console.log('I exist!');
+      
       if (user.status === 'waitingOnZipCode') {
         var zip = user.message.match(/\d{5}/) && user.message.match(/\d{5}/)[0];
         
