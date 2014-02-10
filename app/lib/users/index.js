@@ -65,6 +65,7 @@ User.prototype.message = function (message, callback) {
 };
 
 User.prototype.setStatus = function (status, callback) {
+  console.log('Setting status of ' + this._id + ' to ' + status + '.');
   this.status = status;
   this.save(callback);
 };
