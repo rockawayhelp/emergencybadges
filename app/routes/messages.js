@@ -5,8 +5,8 @@ module.exports = function (server) {
   server.post('/messages', function (req, res, next) {
     var phoneNumber = req.params.From;
     var message = req.params.Body;
+    var responseMessage = '';
     
-    var responseMessage;
     User.findOrCreate(phoneNumber, function (err, user) {
 
       if (err) res.send(500, err);
@@ -17,8 +17,9 @@ module.exports = function (server) {
         responseMessage = 'Welcome back, old friend.';
       }
 
-      user.message(responseMessage);
-      res.send(200, { from: phoneNumber, user: user, response: responseMessage });
+      user.message(responseMessage, function () {
+        res.send(200, { from: phoneNumber, user: user, response: responseMessage });
+      });
 
     });
   });

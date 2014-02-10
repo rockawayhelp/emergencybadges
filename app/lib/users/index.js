@@ -60,7 +60,9 @@ User.prototype.destroy = function (callback) {
 };
 
 User.prototype.message = function (message, callback) {
+  console.log('Sending:', message);
   messenger.send(this._id, message);
+  if (typeof callback === 'function') callback();
 };
 
 module.exports = User;

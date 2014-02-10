@@ -8,6 +8,7 @@ module.exports = {
       to: number,
       from: phoneNumber
     }, function(err, message) {
+      if (err) process.stdout.write(err);
       process.stdout.write(message.sid);
     });
   },
