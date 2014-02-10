@@ -1,8 +1,7 @@
 var cradle = require('cradle');
 var applyDesignDocuments = require('./design-documents');
 
-var couchLocation = process.env.IRISCOUCH;
-// var couchLocation = process.env.CLOUDANT_URL || process.env.COUCHDB || 'http://localhost';
+var couchLocation = process.env.COUCHDB || 'http://localhost';\
 var couch = new(cradle.Connection)(couchLocation, 5984, {
   cache: true,
   raw: false
@@ -33,5 +32,7 @@ db.updateDesignDocuments = function (callback) {
   applyDesignDocuments(db);
   if (typeof callback === 'function') callback();
 };
+
+db.setup();
 
 module.exports = db;
