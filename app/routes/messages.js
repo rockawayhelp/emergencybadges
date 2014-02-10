@@ -35,12 +35,9 @@ module.exports = function (server) {
         return;
       }
       
-      console.log(user.status);
-      console.log(user.status === 'waitingOnZipCode');
-      
       if (user.status === 'waitingOnZipCode') {
         console.log('I am inside the waitingOnZipCode conditional');
-        var zip = user.message.match(/\d{5}/) && user.message.match(/\d{5}/)[0];
+        var zip = user.message.match(/\d{5}/);
         
         console.log(zip);
         
