@@ -7,7 +7,11 @@ module.exports = function (server) {
     var message = req.params.Body;
     var responseMessage = '';
     
+    console.log('Received');
+    
     User.findOrCreate(phoneNumber, function (err, user) {
+      
+      console.log('User.findOrCreate', err, user);
 
       if (err) res.send(500, err);
 
