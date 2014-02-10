@@ -18,6 +18,13 @@ module.exports = function (server) {
       
       console.log(user);
       
+      if (message.toUpperCase() === "RESTART") {
+        user.set('status', null, function (err) {
+          user.message('Resetting...');
+        });
+        return;
+      }
+      
       // TODO: This is a just a WIP while we get the general flow down.
       if (!user.status) {
         user.set('status', 'waitingOnZipCode', function (err, doc) {
@@ -32,6 +39,7 @@ module.exports = function (server) {
       console.log(user.status === 'waitingOnZipCode');
       
       if (user.status === 'waitingOnZipCode') {
+        console.log('I am inside the waitingOnZipCode conditional');
         var zip = user.message.match(/\d{5}/) && user.message.match(/\d{5}/)[0];
         
         console.log(zip);
