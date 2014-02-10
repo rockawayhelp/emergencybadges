@@ -20,17 +20,33 @@ module.exports = function (server) {
       
       // TODO: This is a just a WIP while we get the general flow down.
       if (!user.status) {
-        user.setStatus('waitingOnZipCode', function (err, doc) {
+        user.set('status', 'waitingOnZipCode', function (err, doc) {
           if (err) console.log(err);
           user.message('Welcome. What zip code are you in?');
         });
+        res.send(200, { from: phoneNumber, user: user }); 
+        return;
       }
       
       if (user.status === 'waitingOnZipCode') {
-        user.message('Waiting on a zip code');
+        var zip = user.message.match(/\d{5}/) && user.message.match(/\d{5}/)[0];
+        if (zip) {
+          tasks.getResourcesByZip(zip, function (err, resources) {
+            if (err) console.log(err);
+            user.set({ zip: zip, resourcesRequested: resources, status: 'waitingOnResources' }, function () {
+              user.message('Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', '));
+            });
+          });
+        }
+        res.send(200, { from: phoneNumber, user: user }); 
+        return;
       }
       
-      res.send(200, { from: phoneNumber, user: user });
+      if (user.status === 'waitingOnResources') {
+        user.message('Not implemented.');
+        res.send(200, { from: phoneNumber, user: user }); 
+        return;
+      }
 
     });
   });

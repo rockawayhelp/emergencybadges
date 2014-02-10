@@ -1,6 +1,7 @@
 var db = require('../database');
+var _ = require('lodash');
 
-module.exports = {
+module.exports = taskFinder = {
   getAll: function (callback) {
     db.view('tasks/all', function (err, tasks) {
       if (typeof callback === 'function') callback(err, tasks);
@@ -18,6 +19,14 @@ module.exports = {
   },
   getByZipAndResource: function (zip, resource, callback) {
     db.view('tasks/byZipAndResource', { key: [zip.toString(), resource] }, function (err, tasks) {
+      if (typeof callback === 'function') callback(err, tasks);
+    });
+  },
+  getResourcesByZip: function (zip, callback) {
+    db.view('tasks/all', function (err, tasks) {
+      tasks = _(tasks).map(function (task) {
+        return task.value.resources;
+      }).flatten().uniq().value();
       if (typeof callback === 'function') callback(err, tasks);
     });
   }

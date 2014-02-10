@@ -64,9 +64,15 @@ User.prototype.message = function (message, callback) {
   if (typeof callback === 'function') callback();
 };
 
-User.prototype.setStatus = function (status, callback) {
-  console.log('Setting status of ' + this._id + ' to ' + status + '.');
-  this.status = status;
+User.prototype.set = function (property, value, callback) {
+  if (_.isString(property)) this[property] = value;
+  
+  if (_.isPlainObject(property)) {
+    // Set the second argument as the callback.
+    callback = value;
+    _.extend(this, property);
+  }
+  
   this.save(callback);
 };
 
