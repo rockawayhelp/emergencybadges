@@ -18,7 +18,8 @@ module.exports = taskFinder = {
     });
   },
   getByZipAndResource: function (zip, resource, callback) {
-    db.view('tasks/byZipAndResource', { key: [zip.toString(), resource] }, function (err, tasks) {
+    if (!_.isString(zip)) zip = zip.toString();
+    db.view('tasks/byZipAndResource', { key: [zip, resource] }, function (err, tasks) {
       if (typeof callback === 'function') callback(err, tasks);
     });
   },

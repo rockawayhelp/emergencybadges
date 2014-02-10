@@ -10,18 +10,18 @@ module.exports = function (server) {
     var responseMessage = '';
     
     // TODO: Remove this when moving out of beta.
-    console.log('Received "' + message + '" from ' + phoneNumber);
+    console.log('Received: "' + message + '" from ' + phoneNumber);
     
     User.findOrCreate(phoneNumber, function (err, user) {
       
       if (err) { res.send(500, err); console.log(err); return; };
       
-      console.log(user);
-      
       if (message.toUpperCase() === "RESTART") {
         user.set('status', null, function (err) {
           user.message('Resetting...');
-          user.destroy();
+          user.destroy(function (err, doc) {
+            res.send(200, doc);
+          });
         });
         return;
       }
@@ -29,10 +29,11 @@ module.exports = function (server) {
       // TODO: This is a just a WIP while we get the general flow down.
       if (!user.status) {
         user.set('status', 'waitingOnZipCode', function (err, doc) {
-          if (err) console.log(err);
+          if (err) { console.log(err), res.send(500, err); return; };
           user.message('Welcome. What zip code are you in?');
+          res.write('Welcome. What zip code are you in?');
         });
-        res.send(200, { from: phoneNumber, user: user }); 
+        res.send(200, user);
         return;
       }
       
@@ -55,26 +56,34 @@ module.exports = function (server) {
         return;
       }
       
-      if (user.status === 'waitingOnResources' || user.status === 'taskSelection') {
+      if (user.status === 'waitingOnResources') {
         var resource = message.toUpperCase().trim();
         
-        if (user.resourcesRequested.indexOf(resource) !== 1) {
-          user.set({ resource: resource, status: 'taskSelection' }, function (err) {
-            if (err) console.log(err);
-            if (!err) console.log('User updated.');
+        if (_.contains(user.resourcesRequested, resource)) {
+          tasks.getByZipAndResource(user.zip, resource, function (err, tasks) {
+            
+            var template = _.template('<%= _id %>: <%= description %> (@ <%= address %>)');
+            
+            user.set({ status: 'taskSelection', resource: resource, tasks: tasks }, function (err, doc) {
+              user.message('The following tasks are available:')
+              user.tasks.forEach(function (task) {
+                user.message(task.description);
+              });
+            });
+            
           });
-          tasks.getByZipAndResource(user.zip, user.resource, function (err, tasks) {
-            console.log(err, tasks);
-            var taskTemplate = _.template('<%= id %>: <%= description %> (@ <%= address %>)');
-            tasks = tasks
-              .map(function (task) { return task.value; })
-              .forEach(function (task) { user.message(taskTemplate(task)); } );
-          });
+          
         } else {
-          user.message('That doesn\'t seem to be a valid choice. Please select one of the following: ' + resources.join(', ') + '.');
+          user.message('That\'s not something we\'re looking for. Please try again.');
         }
         
-        res.send(200, { from: phoneNumber, user: user }); 
+        res.send(200, user); 
+        return;
+      }
+      
+      if (user.status === 'taskSelection') {
+        user.message('Task selection');
+        res.send(200, _.extend(user, {message: 'Task selection'}));
         return;
       }
 

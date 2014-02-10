@@ -51,7 +51,7 @@ User.findOrCreate = function (phoneNumber, callback) {
 };
 
 User.prototype.save = function (callback) {
-  db.save(this, callback);
+  db.save(this._id, this, callback);
 };
 
 User.prototype.destroy = function (callback) {
@@ -67,7 +67,7 @@ User.prototype.message = function (message, callback) {
 User.prototype.set = function (property, value, callback) {
   if (_.isString(property)) this[property] = value;
   
-  if (_.isPlainObject(property)) {
+  if (_.isObject(property)) {
     // Set the second argument as the callback.
     callback = value;
     _.extend(this, property);
