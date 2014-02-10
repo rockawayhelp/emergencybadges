@@ -1,7 +1,7 @@
 var cradle = require('cradle');
 var applyDesignDocuments = require('./design-documents');
 
-var couchLocation = process.env.COUCHDB || process.env.CLOUDANT_URL;
+var couchLocation = process.env.CLOUDANT_URL || process.env.COUCHDB || 'http://localhost';
 var couch = new(cradle.Connection)(couchLocation, 5984, {
   cache: true,
   raw: false
