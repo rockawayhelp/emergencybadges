@@ -16,12 +16,12 @@ module.exports = function (server) {
     
     User.findOrCreate(phoneNumber, function (err, user) {
       
-      if (err) { res.send(500, err); console.log(err); return; };
-      
+      if (err) { res.send(500, err); console.log(err); return; }
       
       // TODO: Clean up this rat's nest.
+      var reply;
       if (message.trim().toUpperCase() === 'RESET') {
-        var reply = 'Resetting...';
+        reply = 'Resetting...';
         user.message(reply);
         user.destroy(function () {
           res.send(200, { message: reply });
@@ -35,13 +35,13 @@ module.exports = function (server) {
               if (err) console.log(err);
               user.set({ zip: zip, resourcesRequested: resources, status: 'waitingOnResources' }, function (err) {
                 if (err) console.log(err);
-                var reply = 'Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', ') + '.';
+                reply = 'Okay, the following resources are needed in ' + user.zip + ': ' + resources.join(', ') + '.';
                 user.message(reply);
                 res.send({ message: reply });
               });
             });
           } else {
-            var reply = 'That doesn\'t seem to be a valid zip code. Please try again.';
+            reply = 'That doesn\'t seem to be a valid zip code. Please try again.';
             user.message(reply);
             res.send({ message: reply });
           }
@@ -64,7 +64,7 @@ module.exports = function (server) {
               });
             });
           } else {
-            var reply = 'That\'s not something we\'re looking for. Please try again.';
+            reply = 'That\'s not something we\'re looking for. Please try again.';
             user.message(reply);
             res.send(200, { message: reply });
           }
@@ -76,7 +76,7 @@ module.exports = function (server) {
           });
           if (task) {
             task = task.value;
-            var reply = ['You have selected: ' + task._id + ': ' + task.description + '.'];
+            reply = ['You have selected: ' + task._id + ': ' + task.description + '.'];
             reply.push('The address is ' + task.location + '.');
             reply.push('CONFIRM or GIVEUP');
             user.set({ status: 'waitingForConfirmation', selectedTask: task }, function () {
@@ -84,22 +84,22 @@ module.exports = function (server) {
                 user.message(r);
               });
               res.send(200, _.extend(user, {message: reply}));
-            })
+            });
           } else {
-            var reply = 'That does not seem to be a valid selection.';
+            reply = 'That does not seem to be a valid selection.';
             user.message(reply);
             res.send(200, _.extend(user, {message: reply}));
           }
           break;
         case 'waitingForConfirmation':
-          var reply = 'So, yea. This has\'t been implemented yet. Type RESET to start over.';
+          reply = 'So, yea. This has\'t been implemented yet. Type RESET to start over.';
           user.message(reply);
           res.send(200, _.extend(user, {message: reply}));
           break;
         default:
           user.set('status', 'waitingOnZipCode', function (err, doc) {
-            if (err) { console.log(err), res.send(500, err); return; };
-            var reply = 'Welcome. What zip code are you in?';
+            if (err) { console.log(err); res.send(500, err); return; }
+            reply = 'Welcome. What zip code are you in?';
             user.message(reply);
             res.send(200, { message: reply });
           });

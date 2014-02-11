@@ -4,7 +4,7 @@ if (process.env.NODE_ENV === 'production') {
 
   module.exports = {
     send: function (number, message) {
-      if (number.match(/demo/)) { console.log('SMS:', message); return; };
+      if (number.match(/demo/)) { console.log('SMS:', message); return; }
       twilio.sms.messages.create({
         body: message,
         to: number,
@@ -29,5 +29,5 @@ if (process.env.NODE_ENV === 'production') {
     send: function (number, message) {
       console.log('SMS:', message);
     }
-  }
+  };
 }
