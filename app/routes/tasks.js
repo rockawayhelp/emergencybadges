@@ -1,4 +1,4 @@
-var tasks = require('../lib/tasks');
+var tasks = require('../lib/models/tasks');
 
 module.exports = function (server) {
   

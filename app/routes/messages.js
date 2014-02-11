@@ -1,5 +1,5 @@
-var User = require('../lib/users');
-var tasks = require('../lib/tasks');
+var User = require('../lib/models/users');
+var tasks = require('../lib/models/tasks');
 var _ = require('lodash');
 
 module.exports = function (server) {
