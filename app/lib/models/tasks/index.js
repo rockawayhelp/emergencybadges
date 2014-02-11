@@ -24,11 +24,12 @@ var taskFinder = module.exports = {
     });
   },
   getResourcesByZip: function (zip, callback) {
-    db.view('tasks/all', function (err, tasks) {
-      tasks = _(tasks).map(function (task) {
+    db.view('tasks/all', { key: zip.toString() }, function (err, tasks) {
+      console.log(tasks);
+      var resources = _(tasks).map(function (task) {
         return task.value.resources;
       }).flatten().uniq().value();
-      if (typeof callback === 'function') callback(err, tasks);
+      if (typeof callback === 'function') callback(err, resources);
     });
   }
 };

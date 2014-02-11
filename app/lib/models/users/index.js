@@ -1,5 +1,6 @@
 var db = require('../../database');
 var messenger = require('../../messenger');
+var respondToMessage = require('./respond-to-message');
 var _ = require('lodash');
 
 function User(doc) {
@@ -20,6 +21,8 @@ function User(doc) {
   this.type = 'user';
   
 }
+
+// CLASS METHODS
 
 User.create = function (doc) {
   if (typeof doc === 'string') doc = { _id: doc };
@@ -50,6 +53,8 @@ User.findOrCreate = function (phoneNumber, callback) {
   });
 };
 
+// INSTANCE METHODS
+
 User.prototype.save = function (callback) {
   db.save(this._id, this, callback);
 };
@@ -58,11 +63,31 @@ User.prototype.destroy = function (callback) {
   db.remove(this._id, callback);
 };
 
-User.prototype.message = function (message, callback) {
-  messenger.send(this._id, message);
+
+// Send an SMS message with to the user's phone.
+User.prototype.message = function () {
+  var res, message, callback;
+  
+  if (_.isObject(arguments[0])) { res = arguments[0]; }
+  if (_.isString(arguments[0]) || _.isArray(arguments[0])) { message = arguments[0]; }
+  if (!message && (_.isString(arguments[1]) || _.isArray(arguments[1]))) { message = arguments[1]; }
+  if (_.isFunction(arguments[1])) { callback = arguments[1]; }
+  if (!callback && _.isFunction(arguments[2])) { callback = arguments[2]; }
+  
+  if (_.isArray(message)) {
+    message.forEach(function (m) {
+      messenger.send(this._id, m);
+    })
+  } else {
+    messenger.send(this._id, message);
+  }
+  
+  if (res) { res.send(200, { user: this, message: message }); }
   if (typeof callback === 'function') callback();
 };
 
+// Set one or more properties on the object and save those changes to the
+// database.
 User.prototype.set = function (property, value, callback) {
   if (_.isString(property)) this[property] = value;
   
@@ -73,5 +98,7 @@ User.prototype.set = function (property, value, callback) {
   
   this.save(callback);
 };
+
+User.prototype.respondToMessage = respondToMessage;
 
 module.exports = User;
