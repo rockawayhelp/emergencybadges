@@ -1,4 +1,4 @@
-var db = require('../database');
+var db = require('../../database');
 var _ = require('lodash');
 
 var taskFinder = module.exports = {

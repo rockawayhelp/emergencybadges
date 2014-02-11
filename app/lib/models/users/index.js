@@ -1,5 +1,5 @@
-var db = require('../database');
-var messenger = require('../messenger');
+var db = require('../../database');
+var messenger = require('../../messenger');
 var _ = require('lodash');
 
 function User(doc) {
