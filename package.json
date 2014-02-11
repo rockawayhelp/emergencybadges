@@ -29,7 +29,8 @@
     "restify": "~2.6.1",
     "twilio": "~1.5.0",
     "cradle": "~0.6.6",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "jquery": "~2.1.0"
   },
   "devDependencies": {
     "jshint": "~2.4.3",

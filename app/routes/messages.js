@@ -9,6 +9,8 @@ module.exports = function (server) {
     var message = req.params.Body;
     var responseMessage = '';
     
+    console.log(req.params);
+    
     // TODO: Remove this when moving out of beta.
     console.log('Received: "' + message + '" from ' + phoneNumber);
     
@@ -16,6 +18,8 @@ module.exports = function (server) {
       
       if (err) { res.send(500, err); console.log(err); return; };
       
+      
+      // TODO: Clean up this rat's nest.
       if (message.trim().toUpperCase() === 'RESET') {
         var reply = 'Resetting...';
         user.message(reply);
@@ -66,8 +70,31 @@ module.exports = function (server) {
           }
           break;
         case 'taskSelection':
-          user.message('Task selection');
-          res.send(200, _.extend(user, {message: 'Task selection'}));
+          var selection = message.match(/\d+/) && message.match(/\d+/)[0];
+          var task = _.find(user.tasks, function (t) {
+            return t.value._id === selection;
+          });
+          if (task) {
+            task = task.value;
+            var reply = ['You have selected: ' + task._id + ': ' + task.description + '.'];
+            reply.push('The address is ' + task.location + '.');
+            reply.push('CONFIRM or GIVEUP');
+            user.set({ status: 'waitingForConfirmation', selectedTask: task }, function () {
+              reply.forEach(function (r) {
+                user.message(r);
+              });
+              res.send(200, _.extend(user, {message: reply}));
+            })
+          } else {
+            var reply = 'That does not seem to be a valid selection.';
+            user.message(reply);
+            res.send(200, _.extend(user, {message: reply}));
+          }
+          break;
+        case 'waitingForConfirmation':
+          var reply = 'So, yea. This has\'t been implemented yet. Type RESET to start over.';
+          user.message(reply);
+          res.send(200, _.extend(user, {message: reply}));
           break;
         default:
           user.set('status', 'waitingOnZipCode', function (err, doc) {
