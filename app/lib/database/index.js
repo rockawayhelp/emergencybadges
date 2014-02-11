@@ -14,10 +14,9 @@ db.setup = function (callback) {
     if (err) {
       console.log('error', err);
     } else if (exists) {
-      console.log('Database exists.');
       if (typeof callback === 'function') callback();
     } else {
-      console.log('Database does not exist. Creating.');
+      console.log('Database does not exist. Creating...');
       db.create(function (err, res) {
         if (!err) {
           applyDesignDocuments(db);

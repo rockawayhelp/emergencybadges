@@ -59,7 +59,6 @@ User.prototype.destroy = function (callback) {
 };
 
 User.prototype.message = function (message, callback) {
-  console.log('Sending:', message);
   messenger.send(this._id, message);
   if (typeof callback === 'function') callback();
 };
@@ -68,7 +67,6 @@ User.prototype.set = function (property, value, callback) {
   if (_.isString(property)) this[property] = value;
   
   if (_.isObject(property)) {
-    // Set the second argument as the callback.
     callback = value;
     _.extend(this, property);
   }
