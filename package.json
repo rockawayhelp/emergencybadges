@@ -12,7 +12,7 @@
     "test": "npm run lint && tap ./test/*.test.js",
     "build": "./node_modules/.bin/browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
     "watch": "./node_modules/.bin/watchify ./app/public/scripts/index.js -o ./app/public/client-script.js",
-    "deploy": "git push heroku master"
+    "deploy": "git push heroku master; heroku run npm run build"
   },
   "repository": {
     "type": "git",
