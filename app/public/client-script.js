@@ -7,6 +7,11 @@ $('#phone-number').attr('value', function () {
   return 'demo-user' + randomNumber;
 });
 
+$('#clear').on('click', function (e) {
+  e.preventDefault();
+  $('#log').empty();
+});
+
 $('#messenger').submit(function (event) {
 
   event.preventDefault();
