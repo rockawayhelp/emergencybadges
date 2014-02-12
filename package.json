@@ -4,11 +4,14 @@
   "description": "A basic framework to help people give recognition via OpenBadges during times of emergency.",
   "author": "Rockaway Help",
   "license": "MPLv2",
-  "main": "index.js",
+  "main": "./app/index.js",
   "scripts": {
     "start": "node ./app/index.js",
+    "lint": "jshint app/*",
+    "seed": "node ./app/lib/database/seed",
     "test": "npm run lint && tap ./test/*.test.js",
-    "lint": "jshint app/*"
+    "build": "browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
+    "watch": "watchify ./app/public/scripts/index.js -o ./app/public/client-script.js"
   },
   "repository": {
     "type": "git",
@@ -25,12 +28,15 @@
   "dependencies": {
     "restify": "~2.6.1",
     "twilio": "~1.5.0",
-    "redis": "~0.10.0",
-    "hiredis": "~0.1.16"
+    "cradle": "~0.6.6",
+    "lodash": "~2.4.1",
+    "jquery": "~2.1.0"
   },
   "devDependencies": {
     "jshint": "~2.4.3",
-    "tap": "~0.4.8"
+    "tap": "~0.4.8",
+    "browserify": "~3.28.1",
+    "watchify": "~0.6.1"
   },
   "engines": {
     "node": "0.10.25"

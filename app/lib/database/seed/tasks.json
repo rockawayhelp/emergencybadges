@@ -1,149 +1,170 @@
 [
   {
-    "_id": 1,
+    "_id": "1",
     "description": "Bring food and whiskey to Steve's old apartment",
     "resources": ["FOOD", "WATER", "MEDICINE"],
     "location": "222 Beach 100th Street, Rockaway Park, NY 11694",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 2,
+    "_id": "2",
     "description": "Evacuation assistance at Scholars' Academy",
     "resources": ["CLOTHING", "TRANSPORTATION"],
     "location": "320 Beach 104th Street, Rockaway Park, NY 11694",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 3,
-    "description": "",
+    "_id": "3",
+    "description": "Something, something, something",
     "resources": ["FOOD", "WATER", "MEDICINE"],
     "location": "1236 Rockaway Beach Boulevard, Belle Harbor, NY 11694",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 4,
+    "_id": "4",
     "description": "Pop-up food pantry under Rockaway Freeway",
     "resources": ["FOOD"],
     "location": "9209 De Sota Rd, Rockaway Beach, NY 11693",
-    "zip": "11693"
+    "zip": "11693",
+    "type": "task"
   },
   {
-    "_id": 5,
+    "_id": "5",
     "description": "Clothing drive on the boardwalk",
     "resources": ["CLOTHING"],
     "location": "8256 Shore Front Pkwy, Rockaway Beach, NY 11693",
-    "zip": "11693"
+    "zip": "11693",
+    "type": "task"
   },
   {
-    "_id": 6,
+    "_id": "6",
     "description": "Food collection drop-off location in Rockaway Beach",
     "resources": ["FOOD", "LABOR"],
     "location": "348 Old Beach 88th St, Rockaway Beach, NY 11693",
-    "zip": "11693"
+    "zip": "11693",
+    "type": "task"
   },
   {
-    "_id": 7,
+    "_id": "7",
     "description": "Food and water pick-up and drop-off point",
     "resources": ["FOOD", "WATER"],
     "location": "65-10 Almeda Ave, Arverne, NY 11692",
-    "zip": "11692"
+    "zip": "11692",
+    "type": "task"
   },
   {
-    "_id": 8,
+    "_id": "8",
     "description": "NYC Water On the Go emergency location",
     "resources": ["WATER"],
     "location": "6900 Catamaran Way, Arverne, NY 11692",
-    "zip": "11692"
+    "zip": "11692",
+    "type": "task"
   },
   {
-    "_id": 9,
+    "_id": "9",
     "description": "Food collection and distribution point",
     "resources": ["FOOD", "LABOR"],
     "location": "59-14 Beach Channel Dr, Arverne, NY 11692",
-    "zip": "11692"
+    "zip": "11692",
+    "type": "task"
   },
   {
-    "_id": 10,
+    "_id": "10",
     "description": "Clothing drive in Far Rockaway",
     "resources": ["CLOTHING"],
     "location": "1915 Seagirt Blvd, Far Rockaway, NY 11691",
-    "zip": "11691"
+    "zip": "11691",
+    "type": "task"
   },
   {
-    "_id": 11,
+    "_id": "11",
     "description": "Street cleanup and roadblock removal",
     "resources": ["LABOR"],
     "location": "2-71 Beach 20th St, Far Rockaway, NY 11691",
-    "zip": "11691"
+    "zip": "11691",
+    "type": "task"
   },
   {
-    "_id": 12,
+    "_id": "12",
     "description": "",
     "resources": ["FOOD", "WATER"],
     "location": "2241 New Haven Ave, Far Rockaway, NY 11691",
-    "zip": "11691"
+    "zip": "11691",
+    "type": "task"
   },
   {
-    "_id": 13,
+    "_id": "13",
     "description": "Street clean-up and debris removal at Pickles and Pies",
     "resources": ["LABOR"],
     "location": "2-2 Beach 116th St, Rockaway Park, NY 11694",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 14,
+    "_id": "14",
     "description": "Emergency supplies drop-off and pick-up point",
     "resources": ["FOOD", "WATER", "CLOTHING"],
     "location": "147-02 Newport Ave, Neponsit, NY 11694",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 15,
+    "_id": "15",
     "description": "Drink all of the beer at Jameson's before it goes bad",
     "resources": ["LABOR"],
     "location": "429 Beach 129th Street, Belle Harbor, NY",
-    "zip": "11694"
+    "zip": "11694",
+    "type": "task"
   },
   {
-    "_id": 16,
+    "_id": "16",
     "description": "Street clean-up and roadblock removal",
     "resources": ["LABOR", "TRANSPORTATION"],
     "location": "101 Beach 3rd St, Far Rockaway, NY 11691",
-    "zip": "11691"
+    "zip": "11691",
+    "type": "task"
   },
   {
-    "_id": 17,
+    "_id": "17",
     "description": "Collecting food for dispersement",
     "resources": ["FOOD", "LABOR"],
     "location": "500 Bayside Dr, Breezy Point, NY 11697",
-    "zip": "11697"
+    "zip": "11697",
+    "type": "task"
   },
   {
-    "_id": 18,
+    "_id": "18",
     "description": "Emergency clinic in the West End",
     "resources": ["WATER", "MEDICINE"],
     "location": "406 Bayside, Rockaway Point, NY 11697",
-    "zip": "11697"
+    "zip": "11697",
+    "type": "task"
   },
   {
-    "_id": 19,
+    "_id": "19",
     "description": "Distribute supplies in Breezy Point",
     "resources": ["FOOD", "WATER", "CLOTHING", "LABOR"],
     "location": "22 Beach 221st St, Breezy Point, NY 11697",
-    "zip": "11697"
+    "zip": "11697",
+    "type": "task"
   },
   {
-    "_id": 20,
+    "_id": "20",
     "description": "Recovery and evacuation assistance in Breezy Point",
     "resources": ["FOOD", "LABOR", "TRANSPORTATION"],
     "location": "204-26 Rockaway Point Blvd, Breezy Point, NY 11697",
-    "zip": "11697"
+    "zip": "11697",
+    "type": "task"
   },
   {
-    "_id": 21,
+    "_id": "21",
     "description": "Emerency clinic at Breezy Point",
     "resources": ["LABOR", "MEDICINE"],
     "location": "15 Bedford Ave, Breezy Point, NY 11697",
-    "zip": "11697"
+    "zip": "11697",
+    "type": "task"
   }
 ]

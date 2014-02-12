@@ -1,5 +1,7 @@
+if (process.env.NODE_ENV === 'development') require('../test');
+
 var restify = require('restify');
-var applyMessageRoutes = require('./routes/messages');
+var applyRoutes = require('./routes');
 
 var server = restify.createServer({
   name: 'emergencybadges',
@@ -12,11 +14,7 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(restify.authorizationParser());
 
-server.get('/', function (req, res, next) {
-  res.send(200, {status: 'ok'});
-});
-
-applyMessageRoutes(server);
+applyRoutes(server);
 
 module.exports = server;
 

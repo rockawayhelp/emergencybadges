@@ -1,12 +1,37 @@
-var url = require('url');
-var redis = require('redis');
+var cradle = require('cradle');
+var applyDesignDocuments = require('./design-documents');
 
-if (process.env.REDISTOGO_URL) {
-  var rtg   = url.parse(process.env.REDISTOGO_URL);
-  var client = redis.createClient(rtg.port, rtg.hostname);
-  client.auth(rtg.auth.split(':')[1]);
-} else {
-  var client = redis.createClient();
-}
+var couchLocation = process.env.COUCHDB || 'http://localhost';
+var couch = new(cradle.Connection)(couchLocation, 5984, {
+  cache: true,
+  raw: false
+});
 
-module.exports = client;
+var db = couch.database('emergencybadges');
+
+db.setup = function (callback) {
+  db.exists(function (err, exists) {
+    if (err) {
+      console.log('error', err);
+    } else if (exists) {
+      if (typeof callback === 'function') callback();
+    } else {
+      console.log('Database does not exist. Creating...');
+      db.create(function (err, res) {
+        if (!err) {
+          applyDesignDocuments(db);
+          if (typeof callback === 'function') callback();
+        }
+      });
+    }
+  });
+};
+
+db.updateDesignDocuments = function (callback) {
+  applyDesignDocuments(db);
+  if (typeof callback === 'function') callback();
+};
+
+db.setup();
+
+module.exports = db;
