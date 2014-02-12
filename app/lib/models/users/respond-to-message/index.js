@@ -106,7 +106,13 @@ module.exports = function (message, res) {
         send(replies);
       })
     } else {
-      return send('That doesn\'t seem to be an option. Try again.');
+      var replies = [];
+      replies.push('That doesn\'t seem to be an option. Try again.');
+      user.tasks.forEach(function (task) {
+        replies.push(taskTemplate(task));
+      });
+      replies.push('Pick a number from the list above.');
+      return send(replies);
     }
   }
   
@@ -114,19 +120,29 @@ module.exports = function (message, res) {
     if (message === 'CONFIRM') {
       return user.set('status', 'confirmed', function (err) {
         if (err) handleError();
-        send('Alright, you\'re confirmed.');
+        return send('Alright, you\'re confirmed.');
       });
-    } else if (message === 'DENY') {
+    }
+    
+    if (message === 'DENY') {
       return user.set('status', 'waitingOnTaskSelection', function () {
         var replies = ['Okay, let\'s try this again. We need your help with the following:'];
         tasks.forEach(function (task) {
           replies.push(taskTemplate(task));
         });
         replies.push('Pick a number from the list above.');
+        return send(replies);
       });
-    } else {
-      return send('Sorry, can you try again?');
     }
+    
+    // Fallback if all else fails.
+    
+    var replies = [
+      'Sorry, can you try again?',
+      taskTemplate(user.task),
+      'CONFIRM OR DENY'
+    ];
+    return send(replies);
   }
   
   if (user.status === 'confirmed') {

@@ -1,6 +1,6 @@
 {
   "name": "emergencybadges",
-  "version": "0.0.0-1",
+  "version": "0.0.2",
   "description": "A basic framework to help people give recognition via OpenBadges during times of emergency.",
   "author": "Rockaway Help",
   "license": "MPLv2",
@@ -10,8 +10,9 @@
     "lint": "jshint app/*",
     "seed": "node ./app/lib/database/seed",
     "test": "npm run lint && tap ./test/*.test.js",
-    "build": "browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
-    "watch": "watchify ./app/public/scripts/index.js -o ./app/public/client-script.js"
+    "build": "./node_modules/.bin/browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
+    "watch": "./node_modules/.bin/watchify ./app/public/scripts/index.js -o ./app/public/client-script.js",
+    "deploy": "git push heroku master; heroku run npm run build"
   },
   "repository": {
     "type": "git",
@@ -30,12 +31,12 @@
     "twilio": "~1.5.0",
     "cradle": "~0.6.6",
     "lodash": "~2.4.1",
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "browserify": "~3.28.1"
   },
   "devDependencies": {
     "jshint": "~2.4.3",
     "tap": "~0.4.8",
-    "browserify": "~3.28.1",
     "watchify": "~0.6.1"
   },
   "engines": {
