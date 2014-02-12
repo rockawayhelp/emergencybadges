@@ -6,12 +6,12 @@
   "license": "MPLv2",
   "main": "./app/index.js",
   "scripts": {
-    "start": "node ./app/index.js",
+    "start": "npm run build && node ./app/index.js",
     "lint": "jshint app/*",
     "seed": "node ./app/lib/database/seed",
     "test": "npm run lint && tap ./test/*.test.js",
-    "build": "browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
-    "watch": "watchify ./app/public/scripts/index.js -o ./app/public/client-script.js"
+    "build": "./node_modules/.bin/browserify ./app/public/scripts/index.js -o ./app/public/client-script.js",
+    "watch": "./node_modules/.bin/watchify ./app/public/scripts/index.js -o ./app/public/client-script.js"
   },
   "repository": {
     "type": "git",
