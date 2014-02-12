@@ -6,7 +6,7 @@
   "license": "MPLv2",
   "main": "./app/index.js",
   "scripts": {
-    "start": "npm run build && node ./app/index.js",
+    "start": "node ./app/index.js",
     "lint": "jshint app/*",
     "seed": "node ./app/lib/database/seed",
     "test": "npm run lint && tap ./test/*.test.js",
