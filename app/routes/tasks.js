@@ -21,7 +21,6 @@ module.exports = function (server) {
     } else {
       tasks.getAll(callback);
     }
-
   });
   
 };

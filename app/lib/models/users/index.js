@@ -74,13 +74,7 @@ User.prototype.message = function () {
   if (_.isFunction(arguments[1])) { callback = arguments[1]; }
   if (!callback && _.isFunction(arguments[2])) { callback = arguments[2]; }
   
-  if (_.isArray(message)) {
-    message.forEach(function (m) {
-      messenger.send(this._id, m);
-    })
-  } else {
-    messenger.send(this._id, message);
-  }
+  messenger.send(this._id, message);
   
   if (res) { res.send(200, { user: this, message: message }); }
   if (typeof callback === 'function') callback();
