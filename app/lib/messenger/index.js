@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 if (process.env.NODE_ENV === 'production') {
 
   var twilio = require('twilio')(process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN);

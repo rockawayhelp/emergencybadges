@@ -28,19 +28,9 @@ $('#messenger').submit(function (event) {
   $message.val('');
 
   $.post('/messages', message, function(response) {
-    var reply = response.message;
-  
-    function postResponse(resp) {
+    response.messages.forEach(function (resp) {
       $('<li>').html('<strong>Your phone replied</strong>: ' + JSON.stringify(resp)).appendTo($log);
-    }
-  
-    if (_.isArray(reply)) {
-      _.each(reply, function (r) {
-        postResponse(r);
-      });
-    } else {
-      postResponse(reply);
-    }
+    });
   
   }, 'json');
 
