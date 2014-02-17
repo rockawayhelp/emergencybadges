@@ -1,12 +1,13 @@
 var _ = require('lodash');
 
 if (process.env.NODE_ENV === 'production') {
-  
+
   var twilio = require('twilio')(process.env.TWILIO_ACCOUNT_ID, process.env.TWILIO_AUTH_TOKEN);
   var phoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
   module.exports = {
     send: function (number, message) {
+      console.log("Number@messenger#send", number);
       console.log("Message@messenger#send", message);
       var messages = [].concat(message);
       messages.forEach(function (message) {

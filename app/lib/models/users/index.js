@@ -67,6 +67,7 @@ User.prototype.destroy = function (callback) {
 // Send an SMS message with to the user's phone.
 User.prototype.message = function (message, res, callback) {
   
+  console.log("Number@user#message", this._id);
   console.log("Message@user#message", message);
   
   var messages = [].concat(message);
