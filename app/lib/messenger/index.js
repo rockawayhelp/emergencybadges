@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
     send: function () {
       var args = Array.prototype.slice.call(arguments);
       var number = args.shift();
-      var messages = args.join('\n');
+      var messages = args.join(' ');
       messages.forEach(function (message) {
         twilio.sms.messages.create({
           body: message,
