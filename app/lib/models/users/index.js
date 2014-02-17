@@ -70,9 +70,11 @@ User.prototype.message = function (message, res, callback) {
   console.log("Number@user#message", this._id);
   console.log("Message@user#message", message);
   
+  var number = this._id;
+  
   var messages = [].concat(message);
   messages.forEach(function (m) {
-    messenger.send(this._id, m);
+    messenger.send(number, m);
   });
   
   if (res) { res.send(200, { user: this, messages: messages }); }
