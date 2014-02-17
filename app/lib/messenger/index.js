@@ -9,15 +9,15 @@ if (process.env.NODE_ENV === 'production') {
     send: function () {
       var args = Array.prototype.slice.call(arguments);
       var number = args.shift();
-      var messages = args;
-      messages.forEach(function (body) {
+      var messages = args.join('\n');
+      messages.forEach(function (message) {
         twilio.sms.messages.create({
-          body: body,
+          body: message,
           to: number,
           from: phoneNumber
-        }, function(err, message) {
+        }, function(err, response) {
           if (err) console.log(err);
-          console.log('Sent:', message.sid, number, message);
+          console.log('Sent:', response.sid, number, message);
         });
       });
     }
