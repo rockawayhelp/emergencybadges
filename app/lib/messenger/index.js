@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
       messages.concat(message);
       messages.forEach(function (message) {
         console.log('Sent:', message);
-      };
+      });
     }
   };
   
