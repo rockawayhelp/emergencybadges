@@ -6,10 +6,8 @@ if (process.env.NODE_ENV === 'production') {
   var phoneNumber = process.env.TWILIO_PHONE_NUMBER;
 
   module.exports = {
-    send: function () {
-      var args = Array.prototype.slice.call(arguments);
-      var number = args.shift();
-      var messages = args.join(' ');
+    send: function (number, message) {
+      message.concat(message);
       messages.forEach(function (message) {
         twilio.sms.messages.create({
           body: message,

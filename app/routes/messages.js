@@ -8,7 +8,7 @@ module.exports = function (server) {
     var message = req.params.Body;
     
     User.findOrCreate(phoneNumber, function (err, user) {
-      if (err) { console.log(err); return res.send(500, err); }
+      if (err) { console.log(err); res.send(500, err); return; }
       user.respondToMessage(message, res);
     });
   });
