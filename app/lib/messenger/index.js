@@ -10,14 +10,14 @@ if (process.env.NODE_ENV === 'production') {
       var args = Array.prototype.slice.call(arguments);
       var number = args.shift();
       var messages = args;
-      messages.forEach(function (message) {
+      messages.forEach(function (body) {
         twilio.sms.messages.create({
-          body: message,
+          body: body,
           to: number,
           from: phoneNumber
         }, function(err, message) {
           if (err) console.log(err);
-          console.log(message.sid);
+          console.log('Sent:', message.sid, number, message);
         });
       });
     }
