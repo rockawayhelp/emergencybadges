@@ -6,7 +6,7 @@ module.exports = function (message, res) {
   var taskTemplate = _.template('<%= _id %>: <%= description %> (@ <%= location %>)');
   message = message.trim().toUpperCase();
   
-  function send(reply) { user.message(res, reply); }
+  function send(reply) { user.message(reply, res); }
   function handleError() { send('I\'m sorry. Something went wrong.'); }
   function reset() {
     return user.destroy(function () {
