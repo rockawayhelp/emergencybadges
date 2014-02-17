@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === 'production') {
     send: function (number, message) {
       var messages = [];
       messages.concat(message);
+      console.log(messages);
       messages.forEach(function (message) {
         twilio.sms.messages.create({
           body: message,
@@ -26,7 +27,10 @@ if (process.env.NODE_ENV === 'production') {
   
   module.exports = {
     send: function (number, message) {
-      console.log('SMS:', message);
+      messages.concat(message);
+      messages.forEach(function (message) {
+        console.log('Sent:', message);
+      };
     }
   };
   
