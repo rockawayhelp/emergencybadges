@@ -7,8 +7,6 @@ if (process.env.NODE_ENV === 'production') {
 
   module.exports = {
     send: function (number, message) {
-      console.log("Number@messenger#send", number);
-      console.log("Message@messenger#send", message);
       var messages = [].concat(message);
       messages.forEach(function (message) {
         twilio.sms.messages.create({
