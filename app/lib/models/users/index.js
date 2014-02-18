@@ -65,24 +65,16 @@ User.prototype.destroy = function (callback) {
 
 
 // Send an SMS message with to the user's phone.
-User.prototype.message = function () {
-  var res, message, callback;
+User.prototype.message = function (message, res, callback) {
   
-  if (_.isObject(arguments[0])) { res = arguments[0]; }
-  if (_.isString(arguments[0]) || _.isArray(arguments[0])) { message = arguments[0]; }
-  if (!message && (_.isString(arguments[1]) || _.isArray(arguments[1]))) { message = arguments[1]; }
-  if (_.isFunction(arguments[1])) { callback = arguments[1]; }
-  if (!callback && _.isFunction(arguments[2])) { callback = arguments[2]; }
+  var number = this._id;
   
-  if (_.isArray(message)) {
-    message.forEach(function (m) {
-      messenger.send(this._id, m);
-    })
-  } else {
-    messenger.send(this._id, message);
-  }
+  var messages = [].concat(message);
+  messages.forEach(function (m) {
+    messenger.send(number, m);
+  });
   
-  if (res) { res.send(200, { user: this, message: message }); }
+  if (res) { res.send(200, { user: this, messages: messages }); }
   if (typeof callback === 'function') callback();
 };
 
